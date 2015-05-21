@@ -21,5 +21,5 @@ Example:
 
 ### Copyleft
 
-Copyright :copyright: 2014-2015 Todd Morningstar | [https:://github.com/stratigos](https:://github.com/stratigos)  
+Copyright :copyright: 2015 Todd Morningstar | [https:://github.com/stratigos](https:://github.com/stratigos)  
 GPLv3 LISENCE - Please see [License File](LICENSE.md)  
