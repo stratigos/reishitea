@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # index page route
+  root 'welcome#index'
+
+  get 'reishi-information' => 'welcome#info'
+  get 'about'              => 'welcome#about'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
