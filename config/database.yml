@@ -1,0 +1,30 @@
+#########
+# MySQL #
+#########
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: reishiteadev
+  username:  <%= ENV["DEV_MYSQL_DB_USER"] %>
+  password: <%= ENV["DEV_MYSQL_DB_PASS"] %>
+  host: 127.0.0.1
+
+test:
+  <<: *default
+  database: reishiteatest
+  username: <%= ENV["TEST_MYSQL_DB_USER"] %>
+  password: <%= ENV["TEST_MYSQL_DB_PASS"] %>
+  host: 127.0.0.1
+
+production:
+  <<: *default
+  database: <%= ENV["PROD_MYSQL_DB_SCHEMA"] %>
+  username: <%= ENV["PROD_MYSQL_DB_PASS"] %>
+  password: <%= ENV["PROD_MYSQL_DB_PASS"] %>
+  # host: Heroku?
