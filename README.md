@@ -13,6 +13,7 @@ Database
 
 Set environment variables for DB schema, user, and password, as stated in config/database.yml  
 Example:  
+
     export DEV_MYSQL_DB_USER=myusername
     export DEV_MYSQL_DB_PASS=mypassphrase
 
