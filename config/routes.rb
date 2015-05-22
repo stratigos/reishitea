@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # index page route
   root 'welcome#index'
 
-  get 'reishi-information' => 'welcome#info'
+  get 'reishi-information' => 'welcome#info', as: 'info'
   get 'about'              => 'welcome#about'
 
   # The priority is based upon order of creation: first created -> highest priority.
