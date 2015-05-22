@@ -1,2 +1,59 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="col-md-8">
+<!-- main content -->
+  <div class="row">
+    <div class="well well-sm text-center">
+      <div class="page-header">
+        <h1>Reishi Tea!</h1>
+        <h4>The most delicious beverage in the universe.</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <p class="text-center">
+          <%= image_tag '/images/reishi_shot.jpg', class: 'img-responsive homepage-img', alt: 'Reishi Mushroom' %>
+        </p>
+        <p class="lead">Need a pick-me-up?</p>
+        <p>
+          Bacon ipsum dolor amet ball tip tenderloin chicken turducken. Meatloaf cow tongue ground round t-bone jerky.
+          Capicola beef ribs ham hock picanha sausage frankfurter, beef pork belly hamburger. Chuck ham boudin cow rump
+          hamburger kielbasa bresaola cupim. Brisket rump short loin prosciutto sirloin t-bone leberkas. Spare ribs
+          kevin strip steak corned beef sausage flank pork loin meatloaf venison tenderloin ham doner. Sirloin short
+          ribs kielbasa capicola jerky, strip steak pancetta pork belly sausage venison.
+        </p>
+        <p>
+          Capicola ham shankle, boudin prosciutto tongue ham hock sirloin. Pig hamburger shankle bresaola, rump filet
+          mignon pastrami pancetta bacon leberkas wine kevin ground round hamburger boudin pork biltong, pork chop pork
+          belly strip steak. Porchetta venison picanha meatloaf rump beef ribs tongue pancetta. Meatball cupim short
+          ribs short loin, chicken boudin cow turkey. Alcatra landjaeger short ribs rump ball tip swine salami
+          drumstick frankfurter sausage ham pancetta bacon kielbasa.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="row">
+        <ul id="homepage-fun-facts-list" class="list-group">
+          <li class="list-group-item list-group-item-success">It puts the <em>fun</em> in <em>fungi!</em></li>
+          <li class="list-group-item">Promotes a <strong>strong</strong> pretty much everything!</li>
+          <li class="list-group-item list-group-item-success">Tastes like warm, savory wood!</li>
+          <li class="list-group-item">Makes for a great gift!</li>
+        </ul>
+      </div>
+      <div class="voffset20"></div>
+      <div class="row">
+        <%= render 'partials/shortorder_form' %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- separation -->
+<div class="col-md-1">
+</div>
+<!-- sidebar -->
+<div class="col-md-3">
+  <%= render 'partials/sidebar' %>
+</div>
