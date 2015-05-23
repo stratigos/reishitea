@@ -1,21 +1,21 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
-  test "should get index" do
+  test "Should Get Index" do
     get :index
     assert_response :success
   end
 
-  test "should get info" do
+  test "Should Get Info" do
     get :info
     assert_response :success
   end
 
-  test "should get custom info route" do
+  test "Should Get Custom Info Route" do
     assert_routing '/reishi-information', :controller => 'welcome', :action => 'info'
   end
 
-  test "should get about" do
+  test "Should Get About" do
     get :about
     assert_response :success
   end
