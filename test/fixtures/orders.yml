@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+orderone:
+  name: Derpler Derpheimenmacher
+  street: Einhundert Und Eins Autobahnen Strasse
+  city: Derpenhorf
+  state: Derpenheim
+  country: Deutschland
+  postal: 11237
+  quantity: 5
+
+ordertwo:
+  name: Plunker McPorterchug
+  street: One Twenty Two Petemoss Lane
+  city: Northshire
+  state: Connacht
+  country: Hibernia
+  postal: 12345
+  quantity: 3
