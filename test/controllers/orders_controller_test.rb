@@ -20,7 +20,7 @@ class OrdersControllerTest < ActionController::TestCase
   test "Can Post to Create and Get Successful Redirect" do
     post :create, @post_order
 
-    assert_equal response.location, orders_index_url
+    assert_equal response.location, orders_root_url
     assert_equal response.status,   302
   end
 

@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   get 'about'              => 'welcome#about'
 
   # orders
-  get  'orders/index'
-  get  'orders/new'
-  post 'orders/create'
+  namespace :orders do
+    root action: 'index'
+    get  'new'
+    post 'create'
+  end
   
 end
