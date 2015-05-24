@@ -55,3 +55,6 @@ gem 'jquery-ui-rails'
 
 # Twitter Bootstrap
 gem 'bootstrap-sass', '~> 3.3.4'
+
+# Pusher, for sales events listening
+gem 'pusher'
