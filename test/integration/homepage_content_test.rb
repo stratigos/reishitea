@@ -12,6 +12,7 @@ class HomepageContentTest < ActionDispatch::IntegrationTest
     assert_select   'a[href=?]',     root_path, count: 2 # logo and nav
     assert_select   'a[href=?]',     about_path
     assert_select   'a[href=?]',     info_path
+    assert_select   'a[href=?]',     orders_root_path
     assert_select   'form',          1
     assert_select   'input[type=?]', 'text',    count: 2
     assert_select   'button',        1
