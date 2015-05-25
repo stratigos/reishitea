@@ -18,8 +18,12 @@ class Order < ActiveRecord::Base
   private
 
   # Sends an event to Pusher account that a new Order has been made.
-  #  This could be refactored into a separate concern (which would include
+  # This could be refactored into a separate concern (which would include
   #  the CONST for event name).
+  # Better control over this event hook can be applied by configuring this
+  #  application to ignore callbacks unless such configuration is switched
+  #  on (i.e., default off, turn on for specific tests, or for dev/prod
+  #  environments). See http://railsguides.net/skip-callbacks-in-tests/.
   def send_pusher
     require 'pusher'
 
