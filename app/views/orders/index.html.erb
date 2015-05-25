@@ -22,40 +22,49 @@
         <big>Recent Orders</big>
       </div>
       <div class='recent-orders'>
-        <div class='recent-order'>
-          <p>Name: Stuff</p>
-          <p>City: 1234 Stuff</p>
-          <p>Country: Brazil</p>
-          <p>Quantity: 45</p>
+      <% if @recent_orders %>
+        <% @recent_orders.each do |recent_order| %>
+          <div class="recent-order list-group">
+            <p class="list-group-item list-group-item-success">
+              Name: <%= recent_order.name %>
+            </p>
+            <p class="list-group-item">
+              City: <%= recent_order.city %>
+            </p>
+            <p class="list-group-item">
+              Country: <%= recent_order.country %>
+            </p>
+            <p class="list-group-item">
+              Quantity: <%= recent_order.quantity %>
+            </p>
+          </div>
+          <hr />
+        <% end %>
+      <% else %>
+        <div>
+          <p>No orders yet.</p>
         </div>
-        <hr />
-        <div class='recent-order'>
-          <p>Name: Stuff</p>
-          <p>City: 1234 Stuff</p>
-          <p>Country: Brazil</p>
-          <p>Quantity: 45</p>
-        </div>
-        <hr />
+      <% end %>
       </div>
     </div>
     <div class="col-md-3 recent-sold-container">
       <big>Reishi Teas Sold</big>
       <div class='recent-units-sold'>
-        Today: <span>302</span>
+        Today: <span><%= @today_order_count %></span>
       </div>
       <hr />
       <div class='alltime-units-sold'>
-        All Time: <span>302</span>
+        All Time: <span><%= @alltime_order_count %></span>
       </div>
     </div>
     <div class="col-md-3 recent-shipped-container">
       <big>Reishi Teas Shipped</big>
       <div class="recent-units-shipped">
-        Today: <span>45</span>
+        Today: <span><%= @today_shipped_count %></span>
       </div>
       <hr />
       <div class="alltime-units-shipped">
-        All Time: <span>45</span>
+        All Time: <span><%= @alltime_shipped_count %></span>
       </div>
     </div>
   </div>

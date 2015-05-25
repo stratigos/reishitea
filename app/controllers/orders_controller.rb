@@ -1,7 +1,13 @@
 class OrdersController < ApplicationController
 
   # Loads the page of Orders and related information.
+  # @todo cache all the counts
   def index
+    @recent_orders         = Order.recent.all
+    @today_order_count     = Order.today.count
+    @today_shipped_count   = Order.shipped.count
+    @alltime_order_count   = Order.count
+    @alltime_shipped_count = Order.shipped.count
   end
 
   # Action to allow user to place a new Order. Allows query params for
