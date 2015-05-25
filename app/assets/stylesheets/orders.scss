@@ -1,3 +1,21 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Orders Index */
+
+.recent-units-sold, .recent-units-shipped {
+  margin-top: 4.5em;
+}
+
+@media only screen and (max-width: 768px) {
+  .recent-sold-container, .recent-shipped-container {
+    margin-top: 50px;
+  }
+  .recent-shipped-container {
+    margin-bottom: 50px;
+  }
+  .recent-units-sold, .recent-units-shipped {
+    margin-top: 5px;
+  }
+}
