@@ -93,6 +93,9 @@ GEM
       httpclient (~> 2.5)
       multi_json (~> 1.0)
       signature (~> 0.1.8)
+    pusher-client (0.6.2)
+      json
+      websocket (~> 1.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -155,6 +158,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket (1.2.2)
 
 PLATFORMS
   ruby
@@ -168,6 +172,7 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2
   pusher
+  pusher-client
   rails (= 4.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
