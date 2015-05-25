@@ -1,6 +1,14 @@
 <!-- main content -->
 <div class="col-md-8">
 
+  <% if flash[:notice] %>
+    <div class="row">
+      <div class="notice order-flash-notice">
+        <%= flash[:notice] %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="lead">
       <h1>Reishi Tea Orders</h1>

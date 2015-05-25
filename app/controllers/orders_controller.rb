@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
+      flash[:notice] = 'Order succesfully submitted!'
       redirect_to orders_root_path
     else
       render 'new'
