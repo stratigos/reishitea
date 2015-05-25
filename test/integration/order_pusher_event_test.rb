@@ -8,13 +8,13 @@ class OrderPusherEventTest < ActionDispatch::IntegrationTest
 
     # # Setting up async event listening
     # require 'pusher-client'
-    # @socket = PusherClient::Socket.new('649001c97497e1020b78')
+    # @socket = PusherClient::Socket.new(Rails.configuration.x.pusher.appkey)
     # @socket.connect(true) # Connect asynchronously
 
-    # # Subscribe to the default channel for this environment
+    # # Subscribe to the default application channel
     # @socket.subscribe(Rails.configuration.x.pusher.channel)
 
-    # # Bind to a channel event (can only occur on channel1)
+    # # Bind to the configured channel
     # @socket[Rails.configuration.x.pusher.channel].bind(Order::PUSHER_EVENT_ORDER_RECIEVED) do |data|
     #   @pusher_event = true
     # end

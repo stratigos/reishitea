@@ -26,7 +26,9 @@ module Reishitea
     # Simple Pusher configuration (this can be migrated to a local class / helper
     #  if the config grows complex)
     config.x.pusher.url     = ENV['PUSHER_URL']
+    config.x.pusher.appkey  = ENV['PUSHER_KEY']
+    config.x.pusher.secret  = ENV['PUSHER_SECRET']
+    config.x.pusher.appid   = ENV['PUSHER_APPID']
     config.x.pusher.channel = 'reishitea_' + Rails.env
-
   end
 end
