@@ -5,6 +5,7 @@ Rails 4 demo app which facilitates the purchase and shipping of the world's most
 
 * set environment variable for `secret_key_base:` in secrets.yml
 * set environment variables for DBMS credentials
+* set environment varialbe for PUSHER_URL ( http://KEY:SECRET@api.pusherapp.com/apps/APP_ID )
 
 ### UNDER CONSTRUCTION 
 

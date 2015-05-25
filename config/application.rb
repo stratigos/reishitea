@@ -22,5 +22,11 @@ module Reishitea
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Simple Pusher configuration (this can be migrated to a local class / helper
+    #  if the config grows complex)
+    config.x.pusher.url     = ENV['PUSHER_URL']
+    config.x.pusher.channel = 'reishitea_' + Rails.env
+
   end
 end

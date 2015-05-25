@@ -1,4 +1,9 @@
 class Order < ActiveRecord::Base
+
+  # String literal to describe Pusher event.
+  # @see https://pusher.com/
+  PUSHER_EVENT_ORDER_RECIEVED = 'order_recieved'
+
   has_one :comment, dependent: :destroy, inverse_of: :order
 
   after_create :send_pusher
@@ -12,8 +17,19 @@ class Order < ActiveRecord::Base
 
   private
 
-  # TODO: DOCUMENT AND COMPLETE
+  # Sends an event to Pusher account that a new Order has been made.
+  #  This could be refactored into a separate concern (which would include
+  #  the CONST for event name).
   def send_pusher
+    require 'pusher'
+
+    Pusher.url = Rails.configuration.x.pusher.url
+
+    Pusher[Rails.configuration.x.pusher.channel].trigger(
+      PUSHER_EVENT_ORDER_RECIEVED,
+      { message: 'New Order ' + self.id.to_s }
+    )
+
     true
   end
 
