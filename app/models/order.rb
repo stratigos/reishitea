@@ -1,10 +1,25 @@
+###############################################################################
+# Datatype to represent a customer's info and quantity of teas ordered.
+#
+# The shipping of Orders is represented with the `shipped()` scope, which 
+#  essentially implies that all Orders are shipped within 3 hours of 
+#  placement of the Order.
+#
+# The send_pusher callback sends the order placement event to Pusher.
+#  @see https://pusher.com/
+#  @todo Refactor the process in Order.send_pusher() into a concern / module.
+###############################################################################
 class Order < ActiveRecord::Base
 
   # String literal to describe Pusher event.
-  # @see https://pusher.com/
   PUSHER_EVENT_ORDER_RECIEVED = 'order_recieved'
 
   has_one :comment, dependent: :destroy, inverse_of: :order
+
+  default_scope ->{ order(created_at: :desc) }
+  scope :today, ->{ where('created_at >= ?', 1.day.ago) }
+  scope :recent, ->{ today.limit(5) }
+  scope :shipped, ->{ today.where('created_at <= ?', 3.hours.ago) }
 
   after_create :send_pusher
 
