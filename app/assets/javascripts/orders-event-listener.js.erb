@@ -15,14 +15,21 @@ var subscribeToOrders = function(dataDisplayCallback) {
   var channel = pusher.subscribe('<%= Rails.configuration.x.pusher.channel.to_s %>');
 
   channel.bind('order_recieved', function(data) {
-    console.log('order_recieved data', data, '-----------------------------')
-    alert('An event was triggered with message: ' + data.message);
-    dataDisplayCallback(data);
+    if (typeof dataDisplayCallback === 'function') {
+      data = processPusherData(data);
+      dataDisplayCallback(data);
+    }
   });
+
+  // may need to unsubscribe / disconnect on navigation away from page
 }
 
 /**
- * Handles the Pusher event data, and passes into callback to handle displaying
- *  the data on the page / manipulating page based on state.
+ * Parses the Pusher 'message' (data.order) as JSON
+ * @param data Object
+ *  Expects property data.order, as string containing Order data.
  */
-var processPusherEvent = function(dataDisplayCallback) {}
+var processPusherData = function(pusherData) {
+  pusherData.order = JSON.parse(pusherData.order);
+  return pusherData;
+}
