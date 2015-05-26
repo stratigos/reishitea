@@ -11,15 +11,16 @@
 ###############################################################################
 class Order < ActiveRecord::Base
 
-  # String literal to describe Pusher event.
+  # String literals to describe Pusher events.
   PUSHER_EVENT_ORDER_RECIEVED = 'order_recieved'
+  PUSHER_EVENT_ORDER_SHIPPED  = 'order_shipped'
 
   has_one :comment, dependent: :destroy, inverse_of: :order
 
   default_scope ->{ order(created_at: :desc) }
   scope :today, ->{ where('created_at >= ?', 1.day.ago) }
   scope :recent, ->{ today.limit(5) }
-  scope :shipped, ->{ today.where('created_at <= ?', 3.hours.ago) }
+  scope :shipped, ->{ where('shipped = ?', true) }
 
   after_create :send_pusher
 
@@ -29,6 +30,26 @@ class Order < ActiveRecord::Base
   validates :street,   length: { in: 3..100 }
   validates :quantity, numericality: { only_integer: true, greater_than: 0, less_than: 101 }
   validates_format_of :postal, :with => /\d{5}(-\d{4})?/, :message => 'Invalid Postal Code'
+
+  # 'Ships' the Order to the customer by flicking the on-button. A callback is
+  #   made to the application Pusher account to send the shipment event to the
+  #   appropriate channel. 
+  # Imaginary business rule states it takes about three hours to process and ship
+  #  each order.
+  # @see lib/tasks/buynship.rake (./bin/rake buynship:ship)
+  # @return Boolean
+  #   TRUE if succesfully shipped,
+  #   FALSE if Order already shipped or is not three hours hold.
+  def ship
+    if (!self.shipped) && (self.created_at <= 3.hours.ago)
+      self.shipped = 1
+      self.save
+      send_pusher_shipment
+      return true
+    end
+
+    false
+  end
 
   private
 
@@ -47,6 +68,21 @@ class Order < ActiveRecord::Base
     Pusher[Rails.configuration.x.pusher.channel].trigger(
       PUSHER_EVENT_ORDER_RECIEVED,
       { order: self.to_json(:only => [ :name, :city, :country, :quantity ]) }
+    )
+
+    true
+  end
+
+  # Sends an event to Pusher account that an Order has been shipped. 
+  # @see Order::send_pusher (refactor into seperate concern)
+  def send_pusher_shipment
+    require 'pusher'
+
+    Pusher.url = Rails.configuration.x.pusher.url
+
+    Pusher[Rails.configuration.x.pusher.channel].trigger(
+      PUSHER_EVENT_ORDER_SHIPPED,
+      { order: self.to_json(:only => :quantity ) }
     )
 
     true
