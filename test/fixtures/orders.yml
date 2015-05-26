@@ -8,6 +8,7 @@ orderone:
   country: Deutschland
   postal: 11237
   quantity: 5
+  shipped: 0
 
 ordertwo:
   name: Plunker McPorterchug
@@ -17,3 +18,4 @@ ordertwo:
   country: Hibernia
   postal: 12345
   quantity: 3
+  shipped: 0
