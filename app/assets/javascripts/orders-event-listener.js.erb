@@ -1,0 +1,28 @@
+/*****************************************************************************
+* Pusher event subscription functionality.
+* Currently using ERB to access application config, to simplify demo.
+* @see vendor/assets/javascripts/pusher.min.js
+* @todo Implement `Global` for better access to application config
+*       https://github.com/railsware/global
+******************************************************************************/
+
+/**
+ * Creates a connection to the application's Pusher account, and subscribes to 
+ *  the configured channel.  
+ */
+var subscribeToOrders = function(dataDisplayCallback) {
+  var pusher  = new Pusher('<%= Rails.configuration.x.pusher.appkey.to_s %>');
+  var channel = pusher.subscribe('<%= Rails.configuration.x.pusher.channel.to_s %>');
+
+  channel.bind('order_recieved', function(data) {
+    console.log('order_recieved data', data, '-----------------------------')
+    alert('An event was triggered with message: ' + data.message);
+    dataDisplayCallback(data);
+  });
+}
+
+/**
+ * Handles the Pusher event data, and passes into callback to handle displaying
+ *  the data on the page / manipulating page based on state.
+ */
+var processPusherEvent = function(dataDisplayCallback) {}
