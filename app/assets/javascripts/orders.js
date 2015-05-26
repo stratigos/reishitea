@@ -36,6 +36,7 @@ var updateRecentOrdersList = function(order) {
   // Fade out and remove least-recent order in the list.
   $('div.recent-order').last().fadeOut('fast', function() {
     $(this).remove();
+    $('div.recent-orders hr').last().remove();
   });
 }
 
@@ -43,7 +44,31 @@ var updateRecentOrdersList = function(order) {
  * Increments the 'Reishi Teas Sold' Today and All Time counters.
  */
 var updateTeasSoldCounts = function() {
-  console.log('incrementing sold counts...');
+  // Grab containers for counters.
+  var recentSoldSpan = $('.recent-units-sold span');
+  var allSoldSpan    = $('.alltime-units-sold span');
+
+  // Grab values from counters.
+  var todaySoldVal = recentSoldSpan.text();
+  var allSoldVal   = allSoldSpan.text();
+
+  // Hide current data (so updated value can animate back into view)
+  recentSoldSpan.hide();
+  allSoldSpan.hide();
+
+  // Increment count. This could also be implemented with a NoSQL solution like
+  //  Redis in order to retain more accurate values, without the need to access
+  //  the application's persistent datastore. 
+  todaySoldVal++;
+  allSoldVal++;
+
+  // Update the counter containers' values.
+  recentSoldSpan.text(todaySoldVal);
+  allSoldSpan.text(allSoldVal);
+
+  // Animate the updated values onto the screen.
+  recentSoldSpan.fadeIn();
+  allSoldSpan.fadeIn();
 }
 
 /**
