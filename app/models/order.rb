@@ -46,7 +46,7 @@ class Order < ActiveRecord::Base
 
     Pusher[Rails.configuration.x.pusher.channel].trigger(
       PUSHER_EVENT_ORDER_RECIEVED,
-      { message: 'New Order ' + self.id.to_s }
+      { order: self.to_json(:only => [ :name, :city, :country, :quantity ]) }
     )
 
     true
