@@ -63,3 +63,6 @@ gem 'bootstrap-sass', '~> 3.3.4'
 
 # Pusher, for sales events listening
 gem 'pusher'
+
+# Facilitates creating serialized JSON from an ActiveRecord
+gem 'active_model_serializers'
