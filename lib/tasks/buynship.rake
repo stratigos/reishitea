@@ -23,7 +23,6 @@ namespace :buynship do
   task emulate: :environment do
     # Accept user input for number of loops (Orders) to make. 
     #  Suggested: about 10-15 loops/Orders.
-    puts 'Some kind of instructions will appear here.'
     puts 'Watch the /orders page for real time updates!'
     puts ''
     puts 'Please enter an integer value for the number of Orders to make: '
