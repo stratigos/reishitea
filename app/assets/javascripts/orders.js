@@ -33,11 +33,14 @@ var updateRecentOrdersList = function(order) {
   // Fade the new Order in.
   recentDiv.fadeIn('slow');
 
-  // Fade out and remove least-recent order in the list.
-  $('div.recent-order').last().fadeOut('fast', function() {
-    $(this).remove();
-    $('div.recent-orders hr').last().remove();
-  });
+  // Fade out and remove least-recent order in the list, as long as list has
+  // at least five recent Orders.
+  if ($('div.recent-order').length > 5) {
+    $('div.recent-order').last().fadeOut('fast', function() {
+      $(this).remove();
+      $('div.recent-orders hr').last().remove();
+    });
+  }
 }
 
 /**
