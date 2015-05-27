@@ -31,7 +31,13 @@ var updateRecentOrdersList = function(order) {
   $('div.recent-orders').prepend(recentDiv);
 
   // Fade the new Order in.
-  recentDiv.fadeIn('slow');
+  recentDiv.fadeIn('slow', function() {
+    return $(this).effect('shake', {
+      direction: 'down',
+      distance: 10,
+      times: 3
+    })
+  });
 
   // Fade out and remove least-recent order in the list, as long as list has
   // at least five recent Orders.
