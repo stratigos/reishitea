@@ -5,7 +5,7 @@ Rails 4 demo app which facilitates the purchase and shipping of the world's most
 
 * run `bundle install`
 * set environment variable for `secret_key_base:` in secrets.yml
-* set environment variables for DBMS credentials
+* set environment variables for DBMS credentials, and run db init commands
 * set environment varialbes for Pusher ( `http://KEY:SECRET@api.pusherapp.com/apps/APP_ID` )
 
 Secrets
@@ -25,7 +25,10 @@ Example:
     export DEV_MYSQL_DB_USER=myusername
     export DEV_MYSQL_DB_PASS=mypassphrase
 
-Prepare with: `./bin/rake db:migrate`
+Prepare with the following commands:
+
+    ./bin/rake db:create
+    ./bin/rake db:migrate
 
 Pusher
 ------
