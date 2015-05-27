@@ -18,11 +18,22 @@ namespace :buynship do
     order = Order.create({ :name => 'Reishi Fan #' + fan_num, :street => st_num + ' Someplace St',
                            :city => 'New York City', :state => 'New York', :postal => '11237', :country => 'USA',
                            :quantity => quant_num })
+
+    puts 'Order ' + order.id.to_s + ' created.'
   end
 
   desc "Checks if any orders are ready to be shipped, and ships them."
   task ship: :environment do
-    puts 'Shipping stuff... shipping stuff...'
+    ready_orders = Order.ready_for_shipping.all
+
+    if !ready_orders.empty?
+      puts 'Orders to ship: ' + ready_orders.count.to_s
+      ready_orders.each do |order|
+        order.ship
+      end
+    else
+      puts 'No orders ready for shipping. Check back in 10 seconds.'
+    end
   end
 
 end
