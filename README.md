@@ -48,8 +48,13 @@ Emulate Order placement and shipping with the following rake tasks:
 
     ./bin/rake buynship:order
     ./bin/rake buynship:ship
+    ./bin/rake buynship:emulate
 
-Note: Orders require 10 seconds to process.
+Note: new Orders require 10 seconds to ship.
+
+The `emulate` task will prompt for n-many Orders to make. This will loop through the ordering and shipping routines. 
+A recommended value for this task is 10..15 loops. Watch the /orders page for real time updates while this task is 
+running.
 
 
 -------------------------------------------------------------------------------
