@@ -1,0 +1,11 @@
+export DEV_MYSQL_DB_USER=dev_user
+export DEV_MYSQL_DB_PASS=dev_pw
+export TEST_MYSQL_DB_USER=test_user
+export TEST_MYSQL_DB_PASS=test_pw
+export REISHITEA_DEV_SECRET_KEY_BASE=12345abcd
+export REISHITEA_TEST_SECRET_KEY_BASE=12345abcde
+export PUSHER_KEY=e6e277f0bde9afd0d82d
+export PUSHER_SECRET=7c8fc4d75e33239b2dd7
+export PUSHER_APPID=121877
+export PUSHER_URL=http://e6e277f0bde9afd0d82d:7c8fc4d75e33239b2dd7@api.pusherapp.com/apps/121877
+
