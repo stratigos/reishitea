@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   #  `name` and /or `quantity`.
   def new
     @order = Order.new
+    @order.build_comment
 
     if params[:name] && !params[:name].empty?
       @order.name = params[:name]
@@ -38,6 +39,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :street, :city, :state, :postal, :country, :quantity)
+    params.require(:order).permit(:name, :street, :city, :state, :postal, :country, :quantity, comment_attributes: [:body])
   end
 end

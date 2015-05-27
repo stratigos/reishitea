@@ -25,6 +25,8 @@ class Order < ActiveRecord::Base
 
   after_create :send_pusher
 
+  accepts_nested_attributes_for :comment, :allow_destroy => true, :reject_if => proc { |c| c[:body].blank? } 
+
   validates_associated :comment
   validates :name, :street, :city, :state, :country, :postal, :quantity, presence: true
   validates :name, :city, :state, :country, length: { in: 2..50 }
