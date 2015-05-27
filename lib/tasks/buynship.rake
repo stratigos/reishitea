@@ -9,8 +9,8 @@ namespace :buynship do
   task order: :environment do
     # Generating some varying values based on current timestamp
     fan_num   = Time.now.to_i.to_s
-    st_num    = fan_num.last(3)#[-3, 3]
-    quant_num = fan_num.last(1)#[-1, 1]
+    st_num    = fan_num.last(3)
+    quant_num = fan_num.last(1)
 
     # Creating a new Order should send an event to a Pusher channel, to which
     #  the user facing app at /orders is subscribed, resulting in realtime 
