@@ -30,7 +30,7 @@ Prepare with: `./bin/rake db:migrate`
 Pusher
 ------
 
-This application uses [https://pusher.com/](Pusher) for real time updates. Create a free Pusher account, then export  
+This application uses [https://pusher.com/](Pusher) for real time updates. Create a free Pusher account, then export
 the following environment params to configure the application's Pusher publish/subscribe features:  
 
     export PUSHER_KEY=YOUR_KEY
