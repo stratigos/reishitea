@@ -3,8 +3,8 @@
 
   <% if flash[:notice] %>
     <div class="row">
-      <div class="notice order-flash-notice">
-        <%= flash[:notice] %>
+      <div class="notice order-flash-notice alert alert-success">
+        <%= flash[:notice] %> <span class="badge pull-right">X</span>
       </div>
     </div>
   <% end %>

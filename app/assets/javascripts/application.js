@@ -19,3 +19,14 @@
 //= require bootstrap-sprockets
 //= require pusher.min.js
 //= require_tree .
+
+/**
+ * Allow closing of flash notices
+ */
+$(document).on('ready page:load', function() {
+  if($('div.order-flash-notice')) {
+    $('div.order-flash-notice span.badge').on('click', function() {
+      $(this).parent().fadeOut('fast');
+    });
+  }
+});
