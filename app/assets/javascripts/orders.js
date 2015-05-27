@@ -41,34 +41,40 @@ var updateRecentOrdersList = function(order) {
 }
 
 /**
- * Increments the 'Reishi Teas Sold' Today and All Time counters.
+ * Increments the 'Reishi Teas Sold / Shipped' Today and All Time counters.
+ * @param order Object
+ *  Expects properties: { quantity }
+ * @param recentSelector String
+ *  CSS Selector for the container of the recent / today value.
+ * @param alltimeSelector String
+ *  CSS Selector for the container of the alltime / total value.
  */
-var updateTeasSoldCounts = function() {
+var updateTeasCounts = function(order, recentSelector, alltimeSelector) {
   // Grab containers for counters.
-  var recentSoldSpan = $('.recent-units-sold span');
-  var allSoldSpan    = $('.alltime-units-sold span');
+  var recentSpan = $(recentSelector);
+  var allSpan    = $(alltimeSelector);
 
   // Grab values from counters.
-  var todaySoldVal = recentSoldSpan.text();
-  var allSoldVal   = allSoldSpan.text();
+  var todayVal = recentSpan.text();
+  var allVal   = allSpan.text();
 
   // Hide current data (so updated value can animate back into view)
-  recentSoldSpan.hide();
-  allSoldSpan.hide();
+  recentSpan.hide();
+  allSpan.hide();
 
   // Increment count. This could also be implemented with a NoSQL solution like
   //  Redis in order to retain more accurate values, without the need to access
   //  the application's persistent datastore. 
-  todaySoldVal++;
-  allSoldVal++;
+  todayVal = +todayVal + +order.quantity;
+  allVal   = +allVal   + +order.quantity;
 
   // Update the counter containers' values.
-  recentSoldSpan.text(todaySoldVal);
-  allSoldSpan.text(allSoldVal);
+  recentSpan.text(todayVal);
+  allSpan.text(allVal);
 
   // Animate the updated values onto the screen.
-  recentSoldSpan.fadeIn();
-  allSoldSpan.fadeIn();
+  recentSpan.fadeIn();
+  allSpan.fadeIn();
 }
 
 /**
@@ -76,11 +82,20 @@ var updateTeasSoldCounts = function() {
  *  updating the recent Orders list, and the counts of Orders sold and shipped.
  * @param data Object
  *  JSON containing an Order with some metadata.
+ * @param is_order Boolean
+ *  TRUE assumes data represents a recent Order, and calls appropriate page
+ *   updating function.
+ *  FALSE assumes data represents a recent shipment, and calls the shipment
+ *   updating function.
  */
-var updateOrderData = function(data) {
+var updateOrderData = function(data, is_order) {
   if (data.order) {
-    updateRecentOrdersList(data.order);
-    updateTeasSoldCounts();
+    if(is_order) {
+      updateRecentOrdersList(data.order);
+      updateTeasCounts(data.order, '.recent-units-sold span', '.alltime-units-sold span');
+    } else {
+      updateTeasCounts(data.order, '.recent-units-shipped span', '.alltime-units-shipped span');
+    }
   }
 }
 

@@ -8,17 +8,20 @@
 
 /**
  * Creates a connection to the application's Pusher account, and subscribes to 
- *  the configured channel.  
+ *  the configured channel.
+ * @param orderDisplayCallback function
+ *  Callback to handle drawing recent order or shipment data on the page.
  */
-var subscribeToOrders = function(dataDisplayCallback) {
+var subscribeToOrders = function(orderDisplayCallback) {
   var pusher  = new Pusher('<%= Rails.configuration.x.pusher.appkey.to_s %>');
   var channel = pusher.subscribe('<%= Rails.configuration.x.pusher.channel.to_s %>');
 
-  channel.bind('order_recieved', function(data) {
-    if (typeof dataDisplayCallback === 'function') {
-      data = processPusherData(data);
-      dataDisplayCallback(data);
-    }
+  channel.bind('<%= Order::PUSHER_EVENT_ORDER_RECIEVED %>', function(data) {
+    subscribeCallbackHelper(data, orderDisplayCallback, true);
+  });
+
+  channel.bind('<%= Order::PUSHER_EVENT_ORDER_SHIPPED %>', function(data) {
+    subscribeCallbackHelper(data, orderDisplayCallback, false);
   });
 
   // may need to unsubscribe / disconnect on navigation away from page
@@ -32,4 +35,23 @@ var subscribeToOrders = function(dataDisplayCallback) {
 var processPusherData = function(pusherData) {
   pusherData.order = JSON.parse(pusherData.order);
   return pusherData;
+}
+
+/**
+ * Helper function for code reuse. Ensures the callback function used to 
+ *  Update the DOM is a function, and calls a data processing callback to
+ *  ensure Pusher data is all proper JSON.
+ * @param data Object
+ *  Data from the Pusher channel subscription.
+ * @param orderDisplayCallback function
+ *  Callback to handle drawing recent order or shipment data on the page.
+ * @param is_order Boolean
+ *  TRUE for data is a recent Order
+ *  FALSE for data is a recent shipment
+ */
+var subscribeCallbackHelper = function(data, orderDisplayCallback, is_order) {
+  if (typeof orderDisplayCallback === 'function') {
+    data = processPusherData(data);
+    orderDisplayCallback(data, is_order);
+  }
 }
