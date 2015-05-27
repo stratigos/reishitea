@@ -9,21 +9,24 @@
       <img src="http://lorempixel.com/320/214/nature" class="img-responsive center-block" />
     </p>    
   </div>
-  <div class="well well-sm text-center">
-    <p>Top Customer Comments</p>
-    <div class="list-group">
-      <a href="#" class="list-group-item active ligreen">
-        <h4 class="list-group-item-heading">Joe, Canada</h4>
-        <p class="list-group-item-text">This Reishi Tea is my favorite...</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">Michael, Nicaragua</h4>
-        <p class="list-group-item-text">Couldn't ask for better shipping service.</p>
-      </a>
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">Erika, USA</h4>
-        <p class="list-group-item-text">Time for another order already!</p>
-      </a>
-    </div>
+  <div class="well well-sm text-center"> 
+    <% if !@sidebar_comments.empty? %>
+      <p>Top Customer Comments</p>
+      <div class="list-group">
+      <% @sidebar_comments.each_with_index do |comment, index| %>
+        <% if index == 0 
+          contclass = 'list-group-item active ligreen'
+        else
+          contclass = 'list-group-item'
+        end %>
+        <div class="<%= contclass %>">
+          <h4 class="list-group-item-heading"><%= comment.order.name %>, <%= comment.order.country %></h4>
+          <p class="list-group-item-text"><%= truncate comment.body, length: 60 %></p>
+        </div>
+      <% end %>
+      </div>
+    <% else %>
+      <p>Enter a comment with this order form to see latest comments here!</p>
+    <% end %>
   </div>
 </div>

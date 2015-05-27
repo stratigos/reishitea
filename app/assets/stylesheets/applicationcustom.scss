@@ -5,11 +5,11 @@
 
 /* Bootstrap overrides */
 
-div.list-group a.list-group-item.active.ligreen {
+div.list-group div.list-group-item.active.ligreen {
   background-color: #4cae4c;
   border-color: #4cae4c;
 }
-div.list-group a.list-group-item.active.ligreen p {
+div.list-group div.list-group-item.active.ligreen p {
   color: #FFFFFF;
 }
 

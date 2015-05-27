@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+  before_action :sidebar_recent_comments
+
   # Loads the page of Orders and related information.
   def index
     @recent_orders         = Order.recent.all

@@ -1,4 +1,7 @@
 class WelcomeController < ApplicationController
+
+  before_action :sidebar_recent_comments
+
   def index
   end
 
