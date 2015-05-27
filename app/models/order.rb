@@ -1,9 +1,9 @@
 ###############################################################################
 # Datatype to represent a customer's info and quantity of teas ordered.
 #
-# The shipping of Orders is represented with the `shipped()` scope, which 
-#  essentially implies that all Orders are shipped within 3 hours of 
-#  placement of the Order.
+# The shipping of Orders is handled via the ship() function. Orders need about
+#  ten seconds to process, and then are able to be shipped.
+# @see ./bin/rake buynship:ship
 #
 # The send_pusher callback sends the order placement event to Pusher.
 #  @see https://pusher.com/
@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
   scope :today, ->{ where('created_at >= ?', 1.day.ago) }
   scope :recent, ->{ today.limit(5) }
   scope :shipped, ->{ where('shipped = ?', true) }
+  scope :ready_for_shipping, ->{ where('shipped = ?', false).where('created_at <= ?', 10.seconds.ago) }
 
   after_create :send_pusher
 
@@ -34,14 +35,14 @@ class Order < ActiveRecord::Base
   # 'Ships' the Order to the customer by flicking the on-button. A callback is
   #   made to the application Pusher account to send the shipment event to the
   #   appropriate channel. 
-  # Imaginary business rule states it takes about three hours to process and ship
+  # Imaginary business rule states it takes about ten seconds to process and ship
   #  each order.
   # @see lib/tasks/buynship.rake (./bin/rake buynship:ship)
   # @return Boolean
   #   TRUE if succesfully shipped,
-  #   FALSE if Order already shipped or is not three hours hold.
+  #   FALSE if Order already shipped or is not ten seconds old.
   def ship
-    if (!self.shipped) && (self.created_at <= 3.hours.ago)
+    if (!self.shipped) && (self.created_at <= 10.seconds.ago)
       self.shipped = 1
       self.save
       send_pusher_shipment
