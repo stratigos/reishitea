@@ -25,6 +25,6 @@ test:
 production:
   <<: *default
   database: <%= ENV["PROD_MYSQL_DB_SCHEMA"] %>
-  username: <%= ENV["PROD_MYSQL_DB_PASS"] %>
+  username: <%= ENV["PROD_MYSQL_DB_USER"] %>
   password: <%= ENV["PROD_MYSQL_DB_PASS"] %>
   # host: Heroku?
