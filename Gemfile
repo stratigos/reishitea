@@ -52,6 +52,14 @@ group :development, :test do
 
 end
 
+group :production do
+  # Heroku tools
+  gem 'rails_12factor'
+end
+
+# faster webserver than WEBrick
+gem 'puma'
+
 # MySQL adapter
 gem 'mysql2'
 
