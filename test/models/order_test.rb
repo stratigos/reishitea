@@ -81,6 +81,17 @@ class OrderTest < ActiveSupport::TestCase
   #   @new_order.errors[:postal].must_equal ['Invalid Postal Code']
   # end
 
+  # Test Callbacks
+  test 'Can call send_pusher' do
+    sent = @new_order.send(:send_pusher)
+    assert sent
+  end
+
+  test 'Can call send_pusher_shipment' do
+    sent = @new_order.send(:send_pusher_shipment)
+    assert sent
+  end
+
   # Tests Order::ship by setting created_at 4 hours in the past (3 hours
   #  is needed for shipping to process and take place, its a pretend business
   #  rule).
