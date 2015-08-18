@@ -32,6 +32,16 @@ ordernow:
   shipped: 0
   created_at: <%= DateTime.now %>
 
+ordernotyetshipped:
+  name: Impatient Isabel
+  street: Zero Just Hurry Blvd
+  city: Takingtoolongsville
+  country: USA
+  postal: 11211
+  quantity: 12
+  shipped: 0
+  created_at: <%= 12.hours.ago.to_datetime %>
+
 orderreadyforshipping:
   name: Plunker McPorterchug
   street: One Twenty Two Petemoss Lane
