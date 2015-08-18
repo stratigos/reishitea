@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  order: orderone
+  order: ordernow
   body: This comment rocks
 
 two:
-  order: ordertwo
+  order: orderreadyforshipping
   body: Blablabla Comment 2
+
+commentfromorder:
+  order: orderwithcomment
+  body: Aye! These be great teas!

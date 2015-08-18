@@ -32,7 +32,7 @@ class Order < ActiveRecord::Base
   validates :name, :city, :state, :country, length: { in: 2..50 }
   validates :street,   length: { in: 3..100 }
   validates :quantity, numericality: { only_integer: true, greater_than: 0, less_than: 101 }
-  validates_format_of :postal, :with => /\d{5}(-\d{4})?/, :message => 'Invalid Postal Code'
+  validates_format_of :postal, :with => /\A\d{5}(-\d{4})?\z/, :message => 'Invalid Postal Code'
 
   # 'Ships' the Order to the customer by flicking the on-button. A callback is
   #   made to the application Pusher account to send the shipment event to the
