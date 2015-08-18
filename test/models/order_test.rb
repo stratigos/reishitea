@@ -3,12 +3,12 @@ require 'test_helper'
 class OrderTest < ActiveSupport::TestCase
 
   setup do
-    @order = Order.first
+    @order        = Order.first
   end
 
-  test 'Can Select an Order and its Comment' do
-    assert @order
-    assert_not_nil @order.comment
+  test 'Can Select an Order with its Comment' do
+    assert @orderwithcomment
+    assert_not_nil @orderwithcomment.comment
   end
 
   # Tests Order::ship by setting created_at 4 hours in the past (3 hours
@@ -24,4 +24,5 @@ class OrderTest < ActiveSupport::TestCase
     assert shipped
     assert @order.shipped
   end
+
 end
