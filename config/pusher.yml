@@ -1,0 +1,15 @@
+default: &default
+  url: <%= ENV['PUSHER_URL'] %>
+  appkey: <%= ENV['PUSHER_KEY'] %>
+  secret: <%= ENV['PUSHER_SECRET'] %>
+  appid: <%= ENV['PUSHER_APPID'] %>
+  channel: reishitea_<%= Rails.env %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
