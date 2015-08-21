@@ -10,11 +10,11 @@
     <div>
       <hr />
       <p>
-        This Rails 4 application uses <a href="https://pusher.com/" target="_blank">Pusher</a> to facilitate real time
-        updates on the <%= link_to 'orders page', orders_root_path %>. Also included is a rake task to assist with
-        emulating update and shipment activity (<code>./bin/rake buynship:emulate</code>). MySQL is the DBMS, jQuery 
-        moves stuff around in the DOM, and Twitter Bootstrap provides user facing goodness (can you tell?). You can view
-        the application source, watch issues get fixed, and see features in progress 
+        This Rails 4 application uses the pub/sub service <a href="https://pusher.com/" target="_blank">Pusher</a>
+        to facilitate real time updates on the <%= link_to 'orders page', orders_root_path %>. Also included is a rake
+        task to assist with emulating orders and shipment activity (<code>./bin/rake buynship:emulate</code>). MySQL is
+        the DBMS, jQuery moves stuff around in the DOM, and Twitter Bootstrap provides user facing goodness
+        (can you tell?). You can view the application source, watch issues get fixed, and see features-in-progress 
         <a href="https://github.com/stratigos/reishitea" target="_blank">here</a>.
       </p>
       <hr/>
