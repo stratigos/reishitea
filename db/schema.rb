@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526222746) do
+ActiveRecord::Schema.define(version: 20150822182332) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "order_id",   limit: 4
@@ -20,15 +20,13 @@ ActiveRecord::Schema.define(version: 20150526222746) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "comments", ["order_id"], name: "fk_rails_453b7b85cf", using: :btree
-
   create_table "orders", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "street",     limit: 255
     t.string   "city",       limit: 255
     t.string   "state",      limit: 255
     t.string   "country",    limit: 255
-    t.integer  "postal",     limit: 4
+    t.string   "postal",     limit: 10
     t.integer  "quantity",   limit: 4
     t.boolean  "shipped",    limit: 1,   default: false
     t.datetime "created_at",                             null: false
@@ -37,5 +35,4 @@ ActiveRecord::Schema.define(version: 20150526222746) do
 
   add_index "orders", ["shipped"], name: "index_orders_on_shipped", using: :btree
 
-  add_foreign_key "comments", "orders"
 end
