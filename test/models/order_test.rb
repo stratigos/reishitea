@@ -66,20 +66,17 @@ class OrderTest < ActiveSupport::TestCase
     @new_order.errors[:postal].must_equal ['Invalid Postal Code']
   end
 
-  # @todo Update table 'orders' such that 'orders.postal' is a varchar
-  # test 'Validates Add-on Postal Code is Long Enough' do
-  #   @new_order.postal = '12345-678'
-  #   puts @new_order.inspect
-  #   @new_order.wont_be :valid?
-  #   @new_order.errors[:postal].must_equal ['Invalid Postal Code']
-  # end
+  test 'Validates Add-on Postal Code is Long Enough' do
+    @new_order.postal = '12345-678'
+    @new_order.wont_be :valid?
+    @new_order.errors[:postal].must_equal ['Invalid Postal Code']
+  end
 
-  # test 'Validates Add-on Postal Code not Too Long' do
-  #   @new_order.postal = '12345-67890'
-  #   puts @new_order.inspect
-  #   @new_order.wont_be :valid?
-  #   @new_order.errors[:postal].must_equal ['Invalid Postal Code']
-  # end
+  test 'Validates Add-on Postal Code not Too Long' do
+    @new_order.postal = '12345-67890'
+    @new_order.wont_be :valid?
+    @new_order.errors[:postal].must_equal ['Invalid Postal Code']
+  end
 
   # Test Callbacks
   test 'Can call send_pusher' do
